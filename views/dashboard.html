@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Commerçant</title>
+    <link rel="stylesheet" href="/css/style_dashboard.css">
+</head>
+<body>
+    <!-- Conteneur pour le header -->
+    <div class="header-container">
+        <header>
+            <h1>Interface Commerçant</h1>
+            <nav>
+                <ul id="nav-list">
+                    <div class="nav-left">
+                        <li><a href="/">Retour au site</a></li>
+                    </div>
+                    <div class="nav-right">
+                        <li><a href="/logout">Déconnexion</a></li>
+                    </div>
+                </ul>
+            </nav>
+        </header>
+    </div>
+
+    <!-- Conteneur principal du dashboard -->
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <ul>
+                <li><a href="#stocks">Gestion des stocks</a></li>
+                <li><a href="#orders-chart-section">Graphique des commandes</a></li>
+                <li><a href="#orders">Dernières commandes</a></li>
+                <li><a href="#users-section">Nouveaux utilisateurs</a></li>
+                <li><a href="#customization-section">Personnaliser l'interface</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <!-- Contenu du tableau de bord -->
+            <section id="stocks" class="dashboard-section">
+                <div class="section-header">
+                    <h2>Gestion des Stocks</h2>
+                    <button id="add-stock-btn">Mettre à jour les stocks</button>
+                    <button class="toggle-section-btn" data-target="stock-table">Masquer</button>
+                </div>
+                <table id="stock-table">
+                    <!-- Les données de stock seront insérées ici -->
+                </table>
+            </section>
+            <section id="orders-chart-section" class="dashboard-section">
+                <div class="section-header">
+                    <h2>Nombre de Commandes Validées par Jour</h2>
+                    <button class="toggle-section-btn" data-target="orders-chart-container">Masquer</button>
+                </div>
+                <div id="orders-chart-container">
+                    <canvas id="orders-chart"></canvas>
+                </div>
+            </section>
+            
+            <!-- Gérer les catégories et sous catégories --> 
+            <section id="category-subcategory-management" class="dashboard-section">
+                <div class="section-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <h2>Gestion des Catégories et des Sous-Catégories</h2>
+                    <button class="toggle-section-btn_FLEX" data-target="category-subcategory-content">Masquer</button>
+                </div>
+                
+                <div id="category-subcategory-content" style="display: flex; justify-content: space-between; width: 100%;">
+                    <!-- Gestion des Catégories -->
+                    <div id="category-section" class="form-container" style="width: 48%;">
+                        <h3>Gestion des Catégories</h3>
+                        <div class="form-group">
+                            <label for="new-category-name">Nom de la nouvelle catégorie :</label>
+                            <input type="text" id="new-category-name" class="form-control" placeholder="Nom de la catégorie">
+                            <button id="add-category-btn">Ajouter Catégorie</button>
+                        </div>
+                        <div class="form-group">
+                            <label for="category-select">Catégories existantes :</label>
+                            <select id="category-select" class="form-control"></select>
+                            <input type="text" id="new-category-name-modify" class="form-control" placeholder="Modifier le nom de la catégorie">
+                            <div class="button-group">
+                                <button id="update-category-btn">Mettre à jour Catégorie</button>
+                                <button id="delete-category-btn">Supprimer Catégorie</button>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <!-- Gestion des Sous-Catégories -->
+                    <div id="subcategory-section" class="form-container" style="width: 48%;">
+                        <h3>Gestion des Sous-Catégories</h3>
+                        <div class="form-group">
+                            <label for="new-subcategory-name">Nom de la nouvelle sous-catégorie :</label>
+                            <input type="text" id="new-subcategory-name" class="form-control" placeholder="Nom de la sous-catégorie">
+                            <button id="add-subcategory-btn">Ajouter Sous-Catégorie</button>
+                        </div>
+                        <div class="form-group">
+                            <label for="subcategory-select">Sous-catégories existantes :</label>
+                            <select id="subcategory-select" class="form-control"></select>
+                            <input type="text" id="new-subcategory-name-modify" class="form-control" placeholder="Modifier le nom de la sous-catégorie">
+                            <div class="button-group">
+                                <button id="update-subcategory-btn">Mettre à jour Sous-Catégorie</button>
+                                <button id="delete-subcategory-btn">Supprimer Sous-Catégorie</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+
+            <!-- Nouvelle section pour gérer la bannière de mise en avant -->
+            <section id="featured-products-section" class="dashboard-section">
+                <div class="section-header">
+                    <h2>Gestion de la Bannière de Mise en Avant</h2>
+                    <button class="toggle-section-btn_FLEX" data-target="subfeatured-products-section">Masquer</button>
+                </div>
+                <section id="subfeatured-products-section">
+                    <div class="content">
+                        <div class="form-group banner-settings">
+                            <label for="toggle-banner" class="form-label">Activer la bannière :</label>
+                            <input type="checkbox" id="toggle-banner" name="toggle-banner" class="form-checkbox">
+                        </div>
+                
+                        <div id="product-selection" class="banner-product-selection">
+                            <div class="form-group">
+                                <label for="featured-product-1-select" class="form-label">Produit 1 :</label>
+                                <select id="featured-product-1-select" class="form-control"></select>
+                            </div>
+                
+                            <div class="form-group">
+                                <label for="featured-product-2-select" class="form-label">Produit 2 :</label>
+                                <select id="featured-product-2-select" class="form-control"></select>
+                            </div>
+                
+                            <div class="form-group">
+                                <label for="featured-product-3-select" class="form-label">Produit 3 :</label>
+                                <select id="featured-product-3-select" class="form-control"></select>
+                            </div>
+                        </div>
+                
+                        <button id="save-banner-settings" class="btn save-banner-btn">Enregistrer</button>
+                    </div>
+                </section>
+            </section>
+
+            <section id="orders" class="dashboard-section">
+                <div class="section-header">
+                    <h2>Dernières Commandes Validées</h2>
+                    <button class="toggle-section-btn" data-target="orders-table">Masquer</button>
+                </div>
+                <table id="orders-table">
+                    <!-- Les données des commandes seront insérées ici -->
+                </table>
+            </section>
+
+            <section id="users-section" class="dashboard-section">
+                <div class="section-header">
+                    <h2>Nouveaux utilisateurs</h2>
+                    <a href="dashboard-users"><button id="btn">Gestion des utilisateurs</button></a>
+                    <button class="toggle-section-btn" data-target="users-table">Masquer</button>
+                </div>
+
+                <div id="users-table">
+                    <input type="text" id="search-email" placeholder="Rechercher par email">
+                <table>
+                    <thead>
+                        <tr>
+                            <th data-sort="username" class="sortable">Nom d'utilisateur</th>
+                            <th data-sort="email" class="sortable">Email</th>
+                            <th data-sort="role" class="sortable">Rôle</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Les utilisateurs seront insérés ici -->
+                    </tbody>
+                </table>
+            </div>
+            </section>
+
+            <section id="customization-section" class="dashboard-section">
+                <div class="section-header">
+                    <h2>Personnalisation des Couleurs</h2>
+                    <button class="toggle-section-btn" data-target="color-customization-form">Masquer</button>
+                </div>
+                
+                <form id="color-customization-form">
+                    <label for="couleur1">Couleur principale (En-tête, boutons ...) : </label>
+                    <input type="color" id="couleur1" name="couleur1" value="#1c1c1c"><br>
+            
+                    <label for="couleur2">Couleur texte en-tête et boutons : </label>
+                    <input type="color" id="couleur2" name="couleur2" value="#ffffff"><br>
+            
+                    <label for="couleur3">Couleur d'accent contours, prix ... : </label>
+                    <input type="color" id="couleur3" name="couleur3" value="#c59d5f"><br>
+            
+                    <label for="couleur4">Couleur de fond général : </label>
+                    <input type="color" id="couleur4" name="couleur4" value="#f4f4f4"><br>
+            
+                    <label for="couleur5">Couleur de texte général : </label>
+                    <input type="color" id="couleur5" name="couleur5" value="#333333"><br>
+            
+                    <label for="couleur6">Couleur des bordures de cartes : </label>
+                    <input type="color" id="couleur6" name="couleur6" value="#dddddd"><br>
+            
+                    <label for="couleur7">Couleur des bordures des éléments du panier : </label>
+                    <input type="color" id="couleur7" name="couleur7" value="#555555"><br>
+            
+                    <label for="couleur11">Couleur de survol du bouton commander :</label>
+                    <input type="color" id="couleur11" name="couleur11" value="#dfb577"><br>
+            
+                    <button type="submit">Mettre à jour les couleurs</button>
+                    <button type="button" id="reset-colors-btn">Réinitialiser les couleurs</button>
+                </form>
+            </section>
+
+            <!-- Pop-up pour gérer les stocks et les produits -->
+            <div id="stock-product-popup" class="popup">
+                <div class="popup-overlay">
+                    <div class="popup-content">
+                        <span id="close-popup" class="close">&times;</span>
+                        <div class="tab-container">
+                            <button class="tab-btn active" data-tab="add-product">Ajouter un produit</button>
+                            <button class="tab-btn" data-tab="manage-stock">Gérer les stocks</button>
+                            <button class="tab-btn" data-tab="delete-product">Supprimer une référence</button>
+                        </div>
+            
+                        <!-- Section Ajouter un produit -->
+                        <div id="add-product-section" class="tab-content">
+                            <h2>Ajouter un nouveau produit</h2>
+                            <form id="add-product-form" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label for="product-name">Nom du produit :</label>
+                                    <input type="text" id="product-name" class="form-control" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="product-description">Description :</label>
+                                    <textarea id="product-description" class="form-control textarea" required></textarea>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="product-price">Prix :</label>
+                                    <input type="number" id="product-price" class="form-control" step="0.01" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="product-stock">Stock :</label>
+                                    <input type="number" id="product-stock" class="form-control" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="category-select">Catégorie :</label>
+                                    <select id="category-select" name="category" class="form-control" required>
+                                        <!-- Options seront chargées dynamiquement -->
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="subcategory-select">Sous-catégorie :</label>
+                                    <select id="subcategory-select" name="subcategory" class="form-control" required>
+                                        <!-- Options seront chargées dynamiquement -->
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group custom-file-upload">
+                                    <label for="product-image" id="custom-file-label">Choisir une image</label>
+                                    <input type="file" id="product-image" name="image" class="form-control-file">
+                                </div>
+                                
+                                <button type="submit" class="btn">Ajouter le produit</button>
+                            </form>
+                        </div>
+
+                        <!-- Section Gérer les stocks -->
+                        <div id="manage-stock-section" class="tab-content hidden">
+                            <h2>Gérer les stocks</h2>
+                            <form id="manage-stock-form">
+                                <div class="form-group">
+                                    <label for="product-select">Sélectionnez un produit :</label>
+                                    <select id="product-select" class="form-control">
+                                        <!-- Les options des produits seront insérées ici -->
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="stock-change">Quantité à ajouter/retirer :</label>
+                                    <input type="number" id="stock-change" class="form-control" required>
+                                </div>
+
+                                <button type="submit" class="btn">Mettre à jour le stock</button>
+                            </form>
+                        </div>
+
+                        <!-- Nouvelle section Supprimer une référence -->
+                        <div id="delete-product-section" class="tab-content hidden">
+                            <h2>Supprimer une référence</h2>
+                            <form id="delete-product-form">
+                                <div class="form-group">
+                                    <label for="delete-product-select">Sélectionnez un produit :</label>
+                                    <select id="delete-product-select" class="form-control">
+                                        <!-- Les options des produits seront insérées ici -->
+                                    </select>
+                                </div>
+                        
+                                <button type="submit" class="btn">Supprimer le produit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pop up de notification -->
+            <div id="notification" class="hidden"></div>
+
+        </main>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>

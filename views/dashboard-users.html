@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Utilisateurs</title>
+    <link rel="stylesheet" href="/css/style_dashboard.css">
+    <link rel="stylesheet" href="/css/style_dashboard-all.css">
+</head>
+<body>
+    <header>
+        <h1>Gestion des Utilisateurs</h1>
+        <nav>
+            <ul>
+                <li><a href="/dashboard">Retour au Dashboard</a></li>
+                <li><a href="/logout">Déconnexion</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="dashboard-container">
+        <section id="users-section" class="dashboard-section">
+            <div class="section-header">
+                <h2>Gestion des Utilisateurs</h2>
+                <input type="text" id="search-email" placeholder="Rechercher par email">
+            </div>
+            
+            <div id="users-table">
+                <table id="all-users-table">
+                    <thead>
+                        <tr>
+                            <th data-sort="username" class="sortable">Nom d'utilisateur</th>
+                            <th data-sort="email" class="sortable">Email</th>
+                            <th data-sort="role" class="sortable">Rôle</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Les utilisateurs seront insérés ici -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+    
+    <script src="/js/dashboard-users.js"></script>
+</body>
+</html>

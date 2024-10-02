@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Détails du Produit - Site Commerçant</title>
+        <link rel="stylesheet" href="/css/styles.css">
+    </head>
+    <body>
+        <header>
+            <h1>Détails du produit</h1>
+            <nav>
+                <ul id="nav-list">
+                    <div class="nav-left">
+                        <li id="username-display"></li>
+                    </div>
+                    <div class="nav-right">
+                        <li id="sign-in-button"><a href="/sign-in">Inscription</a></li>
+                        <li id="open-login-popup"><a href="#">Connexion</a></li>
+                        <li id="logout-button" style="display: none;"><a href="#" onclick="logout()">Déconnexion</a></li>
+                        <li id="merchant-dashboard-button" style="display: none;"><a href="/dashboard">Dashboard</a></li>
+                    </div>
+                </ul>
+            </nav>
+            <button id="open-cart-btn">🛒 Ouvrir le Panier</button>
+        </header>
+    
+        <!-- Pop-up de connexion -->
+        <div id="login-popup" class="popup hidden">
+            <div class="popup-content">
+                <span id="close-login-popup" class="close">&times;</span>
+                <h2>Connexion</h2>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mot de passe</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <button type="submit">Se connecter</button>
+                </form>
+                <p id="login-error" style="color:red; display:none;">Erreur de connexion. Veuillez réessayer.</p>
+            </div>
+        </div>
+    
+        <main class="main-container">
+            <div class="container">
+                <!-- Panier à gauche -->
+                <section class="cart" id="cart">
+                    <div id="cart-header">
+                        <h2>Vos achats :</h2>
+                    </div>
+                    <ul id="cart-items">
+                        <!-- Les articles du panier seront générés ici -->
+                    </ul>
+                    <p id="cart-total">Total: €0.00</p>
+                    <button id="clear-cart-btn">Vider le panier</button>
+                    <button id="order-btn">Commander</button>
+                </section>
+        
+                <!-- Détails du produit au centre -->
+                <section class="product-details-container" id="product-details">
+                    <!-- Conteneur de l'image du produit et des infos -->
+                    <div class="product-content">
+                        <div class="product-image-container">
+                            <img src="" alt="" id="product-image">
+                            <!-- Optionnel : ajouter un champ de téléchargement d'image si l'utilisateur est marchand -->
+                            <input type="file" id="image-upload" accept="image/*" style="display: block; margin-top: 10px;">
+                        </div>
+                        <div class="product-info">
+                            <!-- Informations sur le produit seront générées ici -->
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+        
+
+    <footer>
+        <p>&copy; 2024 Site Commerçant. Tous droits réservés.</p>
+    </footer>
+    <script>
+        // Gestion de la pop-up de connexion
+        document.getElementById('open-login-popup').addEventListener('click', function() {
+            document.getElementById('login-popup').classList.remove('hidden');
+        });
+    </script>
+    <!-- Charger les scripts JavaScript -->
+    <script src="/js/add-to-cart.js" type="module"></script>
+    <script src="/js/product-indiv.js" type="module"></script>
+    <script src="/js/panier.js"></script>
+    <script src="/js/login.js"></script>
+    <script src="/js/header.js"></script>
+</body>
+</html>

@@ -1,0 +1,795 @@
+:root {
+    --couleur1: #1c1c1c; /* Couleur principale pour l'en-tête, les boutons, etc. */
+    --couleur2: #ffffff; /* Couleur blanche pour le texte sur les fonds sombres */
+    --couleur3: #c59d5f; /* Accent couleur or */
+    --couleur4: #f4f4f4; /* Couleur de fond générale */
+    --couleur5: #333333; /* Couleur du texte général */
+    --couleur6: #dddddd; /* Couleur des bordures des cartes */
+    --couleur7: #555555; /* Couleur des bordures des éléments du panier */
+    --couleur8: #ff4d4d; /* Rouge vif pour l'alerte ou les hover */
+    --couleur9: #d9534f; /* Couleur d'erreur */
+    --couleur10: #5cb85c; /* Couleur de succès */
+    --couleur11: #dfb577; /* Couleur hover alternative d'un bouton */
+    --couleur12: rgba(0, 0, 0, 0.1); /* Couleur d'ombre légère */
+    --couleur13: rgba(0, 0, 0, 0.5); /* Fond semi-transparent pour la pop-up */
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box; /* Inclut padding et bordure dans la largeur/hauteur totale */
+    padding: 0;
+}
+
+/* Styles globaux */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--couleur4);
+    height: 100vh; /* Hauteur de la fenêtre */
+    overflow: hidden; /* Empêche les barres de défilement globales */
+    display: flex;
+    flex-direction: column; /* Pour empiler le header en haut et le dashboard en dessous */
+}
+
+/* Header */
+
+.header-container {
+    width: 100%;
+    flex-shrink: 0; /* Empêche le header de rétrécir */
+}
+
+header {
+    background-color: var(--couleur1);
+    color: var(--couleur2);
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px var(--couleur12);
+    width: 100%;
+    flex-shrink: 0; /* Empêche le header de rétrécir */
+    z-index: 1000;
+    position: relative; /* Assure que le header reste en haut */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-family: 'Playfair Display', serif;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+.nav-left, .nav-right {
+    display: flex;
+    align-items: center;
+}
+
+.nav-left li {
+    margin-right: 20px;
+}
+
+.nav-right li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: var(--couleur2);
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 10px;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Conteneur du dashboard */
+.dashboard-container {
+    display: flex; /* Utilise Flexbox pour la disposition horizontale */
+    flex: 1; /* Permet à ce conteneur de prendre tout l'espace restant sous le header */
+    width: 100%; /* Prend toute la largeur */
+    overflow: hidden; /* Empêche les barres de défilement horizontales */
+    height: calc(100vh - 80px); /* Hauteur totale moins la hauteur du header */
+}
+
+@media (max-width: 768px) {
+    .dashboard-container {
+        grid-template-columns: 1fr; /* Une seule colonne sur petits écrans */
+        height: auto; /* Ajuste la hauteur pour s'adapter au contenu */
+    }
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: var(--couleur1);
+    color: var(--couleur2);
+    padding: 20px;
+    box-shadow: 2px 0 5px var(--couleur12);
+    height: 100%;
+    flex: 0 0 250px; /* Sidebar fixe à 250px */
+    overflow-y: auto; /* Permet le défilement vertical uniquement */
+    overflow-x: hidden; /* Empêche le défilement horizontal */
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 15px;
+}
+
+.sidebar ul li a {
+    color: var(--couleur2);
+    text-decoration: none;
+    font-size: 1.2rem;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar ul li a:hover {
+    background-color: var(--couleur7);
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+        height: auto; /* Ajuste la hauteur pour s'adapter au contenu */
+        box-shadow: none;
+        width: 100%;
+    }
+    
+    .sidebar ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .sidebar ul li {
+        margin: 10px;
+    }
+}
+
+/* Contenu principal */
+.main-content {
+    padding: 30px;
+    overflow-y: auto; /* Autorise uniquement le défilement vertical pour le contenu principal */
+    background-color: var(--couleur2);
+    flex: 1; /* Prend tout l'espace restant après la sidebar */
+    display: flex;
+    flex-direction: column; /* Dispose les sections verticalement */
+    align-items: center; /* Centre les sections horizontalement */
+    width: calc(100% - 250px); /* Ajuste la largeur pour remplir l'espace restant */
+    box-sizing: border-box; /* Inclut le padding et la bordure dans le calcul de la largeur */
+}
+
+.dashboard-section {
+    margin-bottom: 40px;
+    width: 100%; /* Prend toute la largeur disponible */
+    padding: 10px; /* Ajoute un léger padding pour un meilleur espacement */
+    box-sizing: border-box; /* Inclut le padding dans le calcul de la largeur */
+}
+
+.dashboard-section h2 {
+    font-size: 1.8rem;
+    color: var(--couleur5);
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--couleur3);
+    padding-bottom: 10px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box; /* Include padding in width calculation */
+    padding: 0 10px; /* Add padding to avoid content touching the edges */
+    gap: 10px; /* Add gap between elements for better spacing */
+    flex-wrap: wrap; /* Allows wrapping of content on smaller screens */
+}
+
+.section-header .button-container {
+    display: flex;
+    gap: 10px; /* Adds spacing between buttons */
+    flex-wrap: wrap; /* Wraps buttons to the next line on smaller screens */
+}
+
+.section-header button,
+.section-header .btn {
+    background-color: var(--couleur5);
+    color: var(--couleur2);
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin-left: 0; /* Removes default margin */
+}
+
+.toggle-section-btn {
+    background-color: var(--couleur5);
+    color: var(--couleur2);
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin-left: auto; /* Aligne le bouton à droite */
+}
+
+.toggle-section-btn:hover {
+    background-color: var(--couleur7);
+}
+
+@media (max-width: 768px) {
+    .section-header {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Styles pour la section Gestion de la Bannière de Mise en Avant */
+#featured-products-section {
+    background-color: var(--couleur4);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px var(--couleur12);
+    width: 100%;
+    margin: 0 auto 40px; /* Centre la section horizontalement et ajoute un espace en bas */
+}
+
+/* S'assure que subfeatured-products-section prend toute la largeur et centre son contenu */
+#subfeatured-products-section {
+    display: flex;
+    justify-content: center; /* Centre le contenu horizontalement */
+    width: 100%;
+    padding: 20px 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+#subfeatured-products-section .content {
+    width: 100%; /* Permet au contenu de prendre toute la largeur du conteneur parent */
+    max-width: 600px; /* Limite la largeur maximale pour un meilleur affichage centré */
+    background-color: var(--couleur2);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px var(--couleur12);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#featured-products-section .section-header {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.banner-settings {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.banner-settings .form-label {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.banner-product-selection {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.banner-settings,
+.banner-product-selection {
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.banner-product-selection .form-group {
+    flex: 1;
+    margin-right: 15px;
+}
+
+.banner-product-selection .form-group:last-child {
+    margin-right: 0;
+}
+
+.banner-product-selection .form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.banner-product-selection .form-control {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--couleur6);
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+}
+
+.banner-product-selection .form-control:focus {
+    border-color: var(--couleur3);
+}
+
+.save-banner-btn {
+    display: block;
+    margin: 20px auto 0; /* Centre le bouton et ajoute de l'espace en haut */
+    background-color: var(--couleur1);
+    color: var(--couleur2);
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.save-banner-btn:hover {
+    background-color: var(--couleur3);
+    color: var(--couleur1);
+}
+
+.form-container {
+    background-color: var(--couleur2);
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px var(--couleur12);
+    border-radius: 5px;
+    width: 100%;
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.form-container h2 {
+    font-size: 1.5rem;
+    color: var(--couleur5);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Gestion des tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 10px;
+    border: 1px solid var(--couleur6);
+}
+
+table th {
+    background-color: var(--couleur4);
+    cursor: pointer;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Styles pour les boutons */
+.dashboard-section button {
+    background-color: var(--couleur1);
+    color: var(--couleur2);
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.dashboard-section button:hover {
+    background-color: var(--couleur3);
+    color: var(--couleur1);
+}
+
+/* Graphique */
+#orders-chart-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    display: block;
+}
+
+canvas {
+    display: block;
+    margin: 20px auto;
+    width: 100%;
+    height: auto;
+}
+
+/* Style de la barre de recherche */
+#search-email {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    margin: 25px 0;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 3px var(--couleur12);
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+#search-email:focus {
+    border-color: var(--couleur5);
+    box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Style pour la pop-up */
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--couleur13);
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background-color: var(--couleur2);
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%; /* Ajusté pour s'adapter à l'écran */
+    max-width: 600px; /* Limite maximale de largeur */
+    max-height: 80%; /* Limite maximale de hauteur */
+    overflow-y: auto; /* Ajouter un défilement si le contenu dépasse la hauteur maximale */
+    text-align: left;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Styles pour les onglets */
+.tab-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.tab-content.hidden {
+    display: none;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 10px;
+    background-color: var(--couleur1);
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--couleur2);
+    border-radius: 4px;
+    margin: 5px;
+    transition: all 0.5s;
+}
+
+.tab-btn:hover {
+    color: var(--couleur1);
+    background-color: var(--couleur3);
+    transition: all 0.7s;
+}
+
+.tab-btn.active {
+    background-color: var(--couleur3);
+    font-weight: bold;
+    color: var(--couleur1);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.form-group {
+    margin-bottom: 15px; /* Espacement entre les champs du formulaire */
+    display: flex;
+    flex-direction: column; /* Aligne les éléments en colonne par défaut */
+    align-items: stretch; /* Étire les éléments pour occuper toute la largeur */
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--couleur5);
+}
+
+.form-group input[type="text"],
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid var(--couleur6);
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.form-group input[type="text"]:focus,
+.form-group select:focus {
+    border-color: var(--couleur3);
+    box-shadow: 0 0 5px var(--couleur12);
+}
+
+/* Boutons */
+.form-group button {
+    background-color: var(--couleur1);
+    color: var(--couleur2);
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-group button:hover {
+    background-color: var(--couleur3);
+    color: var(--couleur1);
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.button-group button {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.button-group button:last-child {
+    margin-right: 0;
+}
+
+.form-control {
+    width: 100%; /* Assure que tous les champs occupent toute la largeur de la pop-up */
+    padding: 10px;
+    border: 1px solid var(--couleur6);
+    border-radius: 4px;
+    font-size: 16px;
+    margin-bottom: 15px; /* Espacement entre les champs */
+    box-sizing: border-box; /* Inclut la bordure et le padding dans la largeur totale */
+}
+
+.form-control.textarea {
+    height: 80px; /* Vous pouvez ajuster la hauteur selon vos besoins */
+    resize: vertical; /* Permet à l'utilisateur de redimensionner verticalement */
+}
+
+.form-control:focus {
+    border-color: var(--couleur3);
+    box-shadow: 0 0 5px var(--couleur12);
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--couleur1);
+    color: var(--couleur2);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background-color: var(--couleur3);
+    color: var(--couleur1);
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--couleur1);
+    color: var(--couleur2);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: var(--couleur3);
+    color: var(--couleur1);
+}
+
+/* Style de la notification */
+#notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--couleur10);
+    color: var(--couleur2);
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px var(--couleur12);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#notification.show {
+    opacity: 1;
+}
+
+/* Style du bouton add files */
+.custom-file-upload {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px; /* Espacement sous le conteneur de téléchargement de fichiers */
+}
+
+#custom-file-label {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--couleur6);
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+    background-color: var(--couleur3);
+    color: var(--couleur5);
+    font-size: 16px; /* Ajuster la taille de la police pour correspondre aux autres éléments */
+}
+
+#custom-file-label:hover {
+    color: var(--couleur2);
+    transition: color 0.7s;
+}
+
+input[type="file"] {
+    display: none; /* Masque l'input de fichier par défaut */
+}
+
+/* Style Tableau tri */
+th.sortable {
+    cursor: pointer;
+    position: relative;
+}
+
+th.sortable:after {
+    content: '';
+    position: absolute;
+    right: 8px;
+    transition: transform 0.3s ease;
+}
+
+th.sortable.ascending:after {
+    content: '▲';
+}
+
+th.sortable:not(.ascending):after {
+    content: '▼';
+}
+
+@media (max-width: 768px) {
+    .form-group {
+        flex-direction: column; /* Aligne les éléments en colonne sur petits écrans */
+        align-items: flex-start; /* Aligne les éléments à gauche */
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto; /* Ajuste la hauteur pour s'adapter au contenu */
+        box-shadow: none;
+    }
+
+    .main-content {
+        width: 100%; /* Utilise toute la largeur sur petits écrans */
+        padding: 10px; /* Réduit le padding pour les petits écrans */
+    }
+
+    .form-group label {
+        margin-bottom: 5px; /* Ajoute de l'espace sous les labels */
+    }
+
+    .banner-product-selection {
+        flex-direction: column; /* Aligne les éléments en colonne sur petits écrans */
+        align-items: stretch; /* Étire les éléments pour occuper toute la largeur */
+    }
+
+    .banner-product-selection .form-group {
+        margin-right: 0; /* Supprime l'espacement à droite sur petits écrans */
+        margin-bottom: 15px; /* Ajoute de l'espace sous chaque groupe */
+    }
+
+    .tab-container {
+        flex-direction: column; /* Aligne les onglets en colonne sur petits écrans */
+        width: 100%;
+    }
+
+    .tab-btn {
+        margin-bottom: 10px; /* Ajoute de l'espace entre les boutons sur petits écrans */
+    }
+
+    .dashboard-container {
+        flex-direction: column; /* Change à disposition verticale sur petits écrans */
+        height: auto; /* Ajuste la hauteur pour s'adapter au contenu */
+    }
+}
+
+#categories-container {
+    margin-top: 20px;
+}
+
+#categories-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#categories-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#categories-list li input {
+    flex: 1;
+    padding: 5px;
+    margin-right: 10px;
+}
+
+.save-category-btn {
+    padding: 5px 10px;
+    background-color: var(--couleur3);
+    color: var(--couleur2);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+

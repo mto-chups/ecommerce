@@ -1,0 +1,237 @@
+
+/* Importer les polices élégantes */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap');
+
+:root {
+    --couleur1: #1c1c1c; /* Couleur principale pour l'en-tête, les boutons, etc. */
+    --couleur2: #ffffff;     /* Couleur blanche pour le texte sur les fonds sombres */
+    --couleur3: #c59d5f;  /* Accent couleur or */
+    --couleur4: #f4f4f4;  /* Couleur de fond générale */
+    --couleur5: #333333;     /* Couleur du texte général */
+    --couleur6: #dddddd;     /* Couleur des bordures des cartes */
+    --couleur7: #555555;     /* Couleur des bordures des éléments du panier */
+    --couleur8: #ff4d4d;  /* Rouge vif pour l'alerte ou les hover */
+    --couleur9: #d9534f;  /* Couleur d'erreur */
+    --couleur10: #5cb85c; /* Couleur de succès */
+    --couleur11: #dfb577; /* Couleur hover alternative d'un bouton */
+    --couleur12: rgba(0, 0, 0, 0.1); /* Couleur d'ombre légère */
+    --couleur13: rgba(0, 0, 0, 0.5); /* Fond semi-transparent pour la pop-up */
+}
+
+
+/* Style global pour le corps */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--couleur4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* Conteneur principal pour l'inscription */
+.signup-container, .login-container {
+    position: relative;
+    background-color: var(--couleur2);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px var(--couleur12);
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    margin: 30px;
+}
+
+/* Titre du formulaire */
+.signup-form h2, .login-form h2 {
+    margin-top: 10px;
+    text-align: center;
+    margin-bottom: 25px;
+    color: var(--couleur5);
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+/* Styles pour les champs du formulaire */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--couleur7);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    transition: all 0.3s ease;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ccc; /* Bordure neutre initiale */
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.5s ease, box-shadow 0.5s ease, transform 0.3s ease;
+    background-color: #f8f8f8;
+}
+
+/* Animation lorsque le champ est activé */
+.form-group input:focus {
+    border-color: var(--couleur3);
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.8); /* Ombre dorée lumineuse */
+    transform: scale(1.01);
+    outline: none;
+    background-color: #fffbe7; /* Fond légèrement doré */
+    animation: border-glow 1.5s ease-in-out infinite;
+}
+
+/* Animation lorsque le champ est survolé */
+.form-group input:hover {
+    border-color: var(--couleur3);
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.8); /* Ombre dorée lumineuse */
+    outline: none;
+    background-color: #fffbe7; /* Fond légèrement doré */
+    animation: border-glow 1.5s ease-in-out infinite;
+}
+
+/* Définition de l'animation de brillance de la bordure */
+@keyframes border-glow {
+    0% {
+        box-shadow: 0 0 5px rgba(212, 175, 55, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 15px rgba(212, 175, 55, 0.8);
+    }
+    100% {
+        box-shadow: 0 0 5px rgba(212, 175, 55, 0.4);
+    }
+}
+
+/* Animation pour les labels */
+.form-group input:focus + label,
+.form-group input:not(:placeholder-shown) + label {
+    color: var(--couleur3);
+    transform: translateY(-20px);
+    font-size: 12px;
+}
+
+/* Bouton de soumission */
+button[type="submit"].btn {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--couleur1);
+    color: var(--couleur2);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button[type="submit"].btn:hover {
+    background-color: var(--couleur3);
+    color: var(--couleur1);
+    transform: translateY(-2px);
+}
+
+/* Message d'erreur */
+.error-message {
+    color: var(--couleur9);
+    font-size: 14px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Styles de la pop-up */
+.popup {
+    display: flex;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--couleur13);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.popup-content {
+    background-color: var(--couleur2);
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 0 10px var(--couleur12);
+    transform: none;
+}
+
+.popup .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.popup.hidden {
+    display: none;
+}
+
+/* Styles pour le texte de redirection */
+.login-redirect {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--couleur7);
+}
+
+.login-redirect a {
+    color: var(--couleur1);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-redirect a:hover {
+    color: var(--couleur3);
+    text-decoration: underline;
+}
+
+/* Style pour la croix de fermeture */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--couleur7);
+    background: transparent;
+    border: none;
+}
+
+.close-btn:hover {
+    color: var(--couleur3);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .signup-container {
+        padding: 20px;
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .signup-container {
+        padding: 15px;
+        width: 95%;
+    }
+}

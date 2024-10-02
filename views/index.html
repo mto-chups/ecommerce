@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - Site Commerçant</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<header>
+    <h1>Bienvenue sur la boutique en ligne</h1>
+    <nav>
+        <ul id="nav-list">
+            <div class="nav-left">
+                <li id="username-display"></li>
+            </div>
+            <div class="nav-right">
+                <li id="sign-in-button"><a href="/sign-in">Inscription</a></li>
+                <li id="open-login-popup"><a href="#">Connexion</a></li>
+                <li id="logout-button" style="display: none;"><a href="#" onclick="logout()">Déconnexion</a></li>
+                <li id="merchant-dashboard-button" style="display: none;"><a href="/dashboard">Dashboard</a></li>
+            </div>
+        </ul>
+    </nav>
+    <button id="open-cart-btn">🛒 Ouvrir le Panier</button>
+</header>
+
+<!-- Pop-up de connexion -->
+<div id="login-popup" class="popup hidden">
+    <div class="popup-content">
+        <span id="close-login-popup" class="close">&times;</span>
+        <h2>Connexion</h2>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required autocomplete="email">
+            </div>
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" required autocomplete="current-password">
+            </div>
+            <button type="submit" class="btn">Se connecter</button>
+        </form>        
+        <p id="login-error" style="color:red; display:none;">Erreur de connexion. Veuillez réessayer.</p>
+    </div>
+</div>
+
+
+
+
+
+
+<body>
+    <div id="loader"></div>
+    <main>
+        <section class="cart" id="cart">
+            <div id="cart-header">
+                <h2>Vos achats :</h2>
+            </div>
+            <ul id="cart-items">
+                <!-- Les articles du panier seront générés ici -->
+            </ul>
+            <p id="cart-total"></p>
+            <button id="clear-cart-btn">Vider le panier</button>
+            <button id="order-btn">Commander</button>
+        </section>
+        <section class="submain" id="submain">
+            <!-- Bannière de mise en avant des produits -->
+            <div id="featured-products-banner" class="banner">
+                <!-- Titre de la section des produits en vedette -->
+                <h2 style="color: var(--couleur2); text-align: center;">Les produits du moment !</h2>
+                
+                <!-- Contenu des produits -->
+                <div id="featured-product-1" class="featured-product">
+                    <!-- Contenu du produit 1 -->
+                </div>
+                <div id="featured-product-2" class="featured-product">
+                    <!-- Contenu du produit 2 -->
+                </div>
+                <div id="featured-product-3" class="featured-product">
+                    <!-- Contenu du produit 3 -->
+                </div>
+            </div>
+
+            <!-- Formulaire de filtrage et de tri -->
+            <div class="filter-sort-banner">
+                <label for="search-products">Rechercher un produit :</label>
+                <input type="text" id="search-products" placeholder="Rechercher des produits...">
+    
+                <form id="filter-sort-form">
+                    <!-- Filtrage par catégorie -->
+                    <label for="category-filter">Catégorie:</label>
+                    <select id="category-filter" name="category">
+                        <option value="">Toutes les catégories</option>
+                        <!-- Les options seront chargées dynamiquement -->
+                    </select>
+
+                    <!-- Filtrage par sous-catégorie -->
+                    <label for="subcategory-filter">Sous-catégorie:</label>
+                    <select id="subcategory-filter" name="subcategory">
+                        <option value="">Toutes les sous-catégories</option>
+                        <!-- Les options seront chargées dynamiquement -->
+                    </select>
+
+                    <!-- Tri -->
+                    <label for="sort-order">Trier par:</label>
+                    <select id="sort-order">
+                        <option value="">Trier par</option>
+                        <option value="price_asc">Prix croissant</option>
+                        <option value="price_desc">Prix décroissant</option>
+                        <option value="name_asc">Nom A-Z</option>
+                        <option value="name_desc">Nom Z-A</option>
+                    </select>
+                </form>
+            </div>
+            <section class="product-list" id="product-list">
+                
+                <!-- Les cartes produits seront générées ici -->
+            </section>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Site Commerçant. Tous droits réservés.</p>
+    </footer>
+
+    <!-- Charger les scripts JavaScript -->
+    <script src="/js/panier.js"></script>
+    <script src="/js/add-to-cart.js" type="module"></script>
+    <script src="/js/products.js" type="module"></script>
+    <script src="/js/login.js"></script>
+    <script>
+        // Vérifier si un token est présent dans le localStorage
+        document.addEventListener('DOMContentLoaded', function() {
+            const token = localStorage.getItem('authToken');
+    
+            if (token) {
+                // L'utilisateur est connecté, afficher le bouton de déconnexion
+                document.getElementById('logout-button').style.display = 'block';
+                
+                // Masquer les boutons d'inscription et de connexion
+                document.querySelector('a[href="/sign-in"]').style.display = 'none';
+                document.querySelector('a[href="/login"]').style.display = 'none';
+            }
+        });
+    
+               // Gestion de la pop-up de connexion
+        document.getElementById('open-login-popup').addEventListener('click', function() {
+            document.getElementById('login-popup').classList.remove('hidden');
+        });
+
+        document.getElementById('close-login-popup').addEventListener('click', function() {
+            document.getElementById('login-popup').classList.add('hidden');
+        });
+
+        // Fermer la pop-up en cliquant à l'extérieur du contenu
+        window.addEventListener('click', function(event) {
+            const signupPopup = document.getElementById('signup-popup');
+            const loginPopup = document.getElementById('login-popup');
+            if (event.target === signupPopup) {
+                signupPopup.classList.add('hidden');
+            }
+            if (event.target === loginPopup) {
+                loginPopup.classList.add('hidden');
+            }
+        });
+
+        // Fonction pour cacher le loader une fois que la page est chargée
+        window.onload = function() {
+            var loader = document.getElementById('loader');
+            var content = document.getElementById('content');
+
+            // Vérifie si c'est la première visite
+            if (!localStorage.getItem('hasVisited')) {
+                // Si aucune clé 'hasVisited' n'existe, affiche le loader
+                setTimeout(function() {
+                loader.style.opacity = '0';  // Commence le fondu du loader
+                setTimeout(function() { 
+                    loader.style.display = 'none';  // Retire complètement le loader
+                    content.style.display = 'block';  // Affiche le contenu
+                }, 1000);  // Attend que l'effet de fondu soit terminé
+                }, 2000);  // Affiche le loader pendant 2 secondes
+                
+                // Stocke que l'utilisateur a déjà visité
+                localStorage.setItem('hasVisited', 'true');
+            } else {
+                // Si l'utilisateur a déjà visité, cache directement le loader
+                loader.style.display = 'none';
+                content.style.display = 'block';
+            }
+        };
+
+
+    </script>
+    <script src="/js/header.js"></script>
+
+</body>
+</html>

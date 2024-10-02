@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - Site Commerçant</title>
+    <link rel="stylesheet" href="/css/style_sign-in.css">
+</head>
+<body>
+    <div class="signup-container">
+        <span class="close-btn" id="close-btn">&times;</span>
+        <div class="signup-form">
+            <h2>Créer un compte</h2>
+            <form id="sign-in-form">
+                <div class="form-group">
+                    <label for="username">Nom d'utilisateur</label>
+                    <input type="text" id="username" name="username" placeholder="Entrez votre nom d'utilisateur" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Entrez votre adresse email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Confirmez le mot de passe</label>
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirmez votre mot de passe" required>
+                </div>
+                <button type="submit" class="btn">S'inscrire</button>
+            </form>
+            <p id="signin-error" class="error-message" style="display:none;">Erreur d'inscription. Veuillez réessayer.</p>
+            <p class="login-redirect">Déjà un compte ? <a href="/login">Connectez-vous !</a></p>
+        </div>
+    </div>
+
+    <!-- Pop-up Modale -->
+    <div id="signup-success-popup" class="popup hidden">
+        <div class="popup-content">
+            <span class="close">&times;</span>
+            <p>Inscription réussie !</p>
+        </div>
+    </div>
+
+
+    <script src="/js/sign-in.js"></script>
+</body>
+</html>

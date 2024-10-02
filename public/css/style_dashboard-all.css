@@ -1,0 +1,85 @@
+:root {
+    --couleur1: #1c1c1c; /* Couleur principale pour l'en-tête, les boutons, etc. */
+    --couleur2: #ffffff;     /* Couleur blanche pour le texte sur les fonds sombres */
+    --couleur3: #c59d5f;  /* Accent couleur or */
+    --couleur4: #f4f4f4;  /* Couleur de fond générale */
+    --couleur5: #333333;     /* Couleur du texte général */
+    --couleur6: #dddddd;     /* Couleur des bordures des cartes */
+    --couleur7: #555555;     /* Couleur des bordures des éléments du panier */
+    --couleur8: #ff4d4d;  /* Rouge vif pour l'alerte ou les hover */
+    --couleur9: #d9534f;  /* Couleur d'erreur */
+    --couleur10: #5cb85c; /* Couleur de succès */
+    --couleur11: #dfb577; /* Couleur hover alternative d'un bouton */
+    --couleur12: rgba(0, 0, 0, 0.1); /* Couleur d'ombre légère */
+    --couleur13: rgba(0, 0, 0, 0.5); /* Fond semi-transparent pour la pop-up */
+}
+
+/* Styles spécifiques pour dashboard-users.html */
+
+/* Conteneur principal pour l'affichage des utilisateurs */
+.dashboard-container {
+    display: flex;
+    flex-direction: column; /* Utiliser une disposition en colonne */
+    padding: 20px;
+    box-sizing: border-box;
+    width: 100%; /* Assurez-vous que le conteneur utilise toute la largeur disponible */
+}
+
+.main-content {
+    width: 100%; /* S'assurer que le contenu principal utilise toute la largeur */
+    padding: 20px;
+    overflow-y: auto;
+    background-color: var(--couleur2);
+}
+
+/* S'assurer que le tableau d'utilisateurs utilise toute la largeur */
+#users-table {
+    width: 100%;
+    overflow-x: auto; /* Activer le défilement horizontal pour les tableaux larges */
+    margin-top: 20px;
+    box-sizing: border-box;
+}
+
+#all-users-table {
+    width: 100%;
+    border-collapse: collapse; /* Supprimer les espaces entre les cellules */
+}
+
+#all-users-table th, #all-users-table td {
+    padding: 12px 15px; /* Ajouter du padding pour l'espacement dans les cellules */
+    text-align: left; /* Aligner le texte à gauche */
+    border-bottom: 1px solid var(--couleur6); /* Ajouter une bordure au bas des cellules */
+}
+
+#all-users-table th {
+    background-color: var(--couleur4); /* Couleur de fond pour les en-têtes */
+    cursor: pointer; /* Indiquer que les en-têtes sont cliquables pour le tri */
+}
+
+#all-users-table tr:nth-child(even) {
+    background-color: #f9f9f9; /* Couleur de fond pour les lignes paires */
+}
+
+#all-users-table tr:hover {
+    background-color: #f1f1f1; /* Changer la couleur de fond au survol */
+}
+
+/* Assurez-vous que la barre de recherche est bien alignée */
+#search-email {
+    width: 50%;
+    max-width: 400px;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 3px var(--couleur12);
+}
+
+/* Ajustements pour le tableau responsive */
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
